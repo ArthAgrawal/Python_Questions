@@ -1,0 +1,47 @@
+import random
+
+counter = 0
+for i in range(10000):                          # Taking a large sample space of 10000 for uniform results and accurate probabiltiy
+
+    final_player_choice = 0
+    car_door = random.randint(1, 3)             # Car is behind this door and goats are behind the other 2 doors
+    player_choice = random.randint(1, 3)        # Player chooses a random door
+
+    # print(f"Player chose door number {player_choice}")
+    doors = [1, 2, 3]
+    if player_choice == car_door:
+        doors.remove(player_choice)
+        random_door = random.choice(doors)       
+        # print(f'Opening door number {random_door} and a goat is behind it ')
+        switch = 0
+        if switch == 0:
+            # print("Player chose not to switch")
+            final_player_choice = player_choice
+        elif switch == 1:
+            # print("Player chose to switch")
+            doors.remove(random_door)
+            final_player_choice = doors[0]
+
+    elif player_choice != car_door:
+        doors.remove(car_door)
+        doors.remove(player_choice)
+        a = doors[0]
+        # print(f'Opening door number {a} and a goat is behind it ')
+        switch2 = 0
+        if switch2 == 0:
+            # print("Player chose not to switch")
+            final_player_choice = player_choice
+        elif switch2 == 1:
+            # print("Player chose to switch")
+            doors2 = [1, 2, 3]
+            doors2.remove(player_choice)
+            doors2.remove(a)
+            final_player_choice = doors2[0]
+            
+    # print(f"The car was behind door number {car_door} and players final choice was door number {final_player_choice}")
+    if final_player_choice == car_door:
+        counter += 1
+
+probability = counter / 100
+print(f"Probability of player winning when he doesn't switch is {probability}%")
+print(f"Probability of player winning when he does switch is {100 - probability}%")
